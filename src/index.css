@@ -7,6 +7,10 @@ body{
     font-family: "Kanit", sans-serif;
 }
 
+::-webkit-scrollbar{
+    display: none;
+}
+
 ::selection{
     color: white;
     background-color: red;

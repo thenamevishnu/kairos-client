@@ -12,14 +12,14 @@ export default {
             keyframes: {
                 floating: {
                     "0%": { transform: 'translate(0%, 0%)'},
-                    "25%": { transform: 'translate(0%, 2%)' },
+                    "25%": { transform: 'translate(0%, 5%)' },
                     "50%": { transform: 'translate(0%, 0%)' },
-                    "75%": { transform: 'translate(0%, -2%)' },
+                    "75%": { transform: 'translate(0%, -5%)' },
                     "100%": { transform: 'translate(0%, 0%)' },
                 }
             },
             animation: {
-                floating: "floating 5s linear infinite"
+                floating: "floating 3s linear infinite"
             },
             colors: {
                 mainGreen: "#093B3B",
