@@ -1,10 +1,10 @@
 import { Fragment } from "react"
-import Header from "../Components/Header/Header"
+import Landing from "../Components/Landing/Landing"
 
 const LandingPage = () => {
     return (
         <Fragment>
-            <Header />
+            <Landing />
         </Fragment>
     )
 }
