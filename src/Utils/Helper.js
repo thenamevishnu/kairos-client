@@ -9,3 +9,7 @@ export const setToken = (token) => {
 export const getToken = () => {
     return localStorage.getItem("_access_token_") || null
 }
+
+export const removeToken = () => {
+    localStorage.removeItem("_access_token_")
+}

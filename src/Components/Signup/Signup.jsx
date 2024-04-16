@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react"
 import Header from "../Header/Header"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import toast from "react-hot-toast"
 import { createUser } from "../../Services/user"
@@ -19,6 +19,9 @@ const Signup = () => {
     })
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const location = useLocation()
+    const search = new URLSearchParams(location.search)
+    const nextRoute = search.get("next")
 
     const handleCreateAccount = async (event) => {
         event.preventDefault()
@@ -32,10 +35,10 @@ const Signup = () => {
                     id: sub._id,
                     name: sub.name,
                     picture: sub.dp,
-                    gmail: sub.gmail,
+                    email: sub.email,
                     username: sub.username
                 }))
-                navigate("/", {
+                navigate(nextRoute ? nextRoute : "/", {
                     replace: true
                 })
             }, 1500);
@@ -47,7 +50,7 @@ const Signup = () => {
     return (
         <Fragment>
             <Header search={ false } />
-            <div className="w-screen flex justify-center mt-10 px-2 md:px-0">
+            <div className="w-screen flex justify-center mt-20 px-2 md:px-0">
                 <form className="w-full bg-primaryGreen sm:w-[500px] rounded-xl p-4" autoComplete="off" onSubmit={handleCreateAccount}>
                     <h1 className="text-center text-2xl">Create Account</h1>
                     <div className="mt-6 w-full bg-white flex items-center border-2 rounded-xl">

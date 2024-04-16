@@ -9,7 +9,7 @@ import Footer from "./Footer"
 const Landing = () => {
     return (
         <Fragment>
-            <Header />
+            <Header search={ true } />
             <HeroSection />
             <TrustedBy />
             <HowWorks />
