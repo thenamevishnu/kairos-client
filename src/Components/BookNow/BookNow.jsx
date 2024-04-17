@@ -18,6 +18,7 @@ const BookNow = () => {
         start: "",
         end: ""
     })
+
     const navigate = useNavigate()
 
     const handleStartTime = (event) => {
@@ -27,7 +28,7 @@ const BookNow = () => {
 
     const handleBooking = async (event) => {
         event.preventDefault()
-        const bookData = { ...formData, studentMail: email, user: id, date: new Date(formData.date).toLocaleDateString("en-IN") }
+        const bookData = { ...formData, studentMail: email, user: id, date: Math.floor(new Date(formData.date).getTime()/1000) }
         for (let key in formData) {
             if (!formData[key]) {
                 return toast.error(`${key.replace(key.charAt(0), key[0].toUpperCase())} is empty!`)

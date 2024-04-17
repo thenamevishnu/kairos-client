@@ -22,6 +22,11 @@ const Login = () => {
 
     const handleLogin = async (event) => {
         event.preventDefault()
+        for (let key in formData) {
+            if (!formData[key]) {
+                return toast.error(`${key.replace(key.charAt(0), key[0].toUpperCase())} is empty!`)
+            }
+        }
         const response = await loginUser(formData)
         if (response?.result) {
             setToken(response.result)

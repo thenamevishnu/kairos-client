@@ -39,7 +39,8 @@ const Bookings = () => {
                                     <img src={item?.cover} className="rounded-xl"/>
                                 </div>
                                 <h1>{ item.mentorInfo?.[0].domain }</h1>
-                                <p>Mentor: { item.mentorInfo?.[0].name } </p>
+                                <p>Mentor: {item.mentorInfo?.[0].name} </p>
+                                <p>Date: {new Date(item.date * 1000).toLocaleDateString("en-IN")}</p>
                                 <p>Time: {item.time.from} - {item.time.to}</p>
                                 <button onClick={() => naviagte("/sessions/join")} className="bg-lightGreen p-1 px-3 text-white rounded-lg mt-4 w-full flex items-center justify-center"><i className="fa fa-video mr-2"/> Join Meet</button>
                             </div>
