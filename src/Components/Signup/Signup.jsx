@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react"
+import { Fragment, useRef, useState } from "react"
 import Header from "../Header/Header"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
@@ -17,6 +17,10 @@ const Signup = () => {
         username: "",
         password: "",
         confirm_password: ""
+    })
+    const [PasswordVisibility, setPasswordVisibility] = useState({
+        password: false,
+        confirm: false
     })
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -38,19 +42,17 @@ const Signup = () => {
         if (response?.result) {
             setToken(response.result)
             const { sub } = jwtDecode(response.result)
-            toast.success("Redirecting...")
-            setTimeout(() => {
-                dispatch(updateUser({
-                    id: sub._id,
-                    name: sub.name,
-                    picture: sub.dp,
-                    email: sub.email,
-                    username: sub.username
-                }))
-                navigate(nextRoute ? nextRoute : "/", {
-                    replace: true
-                })
-            }, 1500);
+            dispatch(updateUser({
+                id: sub._id,
+                name: sub.name,
+                picture: sub.dp,
+                email: sub.email,
+                username: sub.username,
+                type: sub.type
+            }))
+            navigate(nextRoute ? nextRoute : "/", {
+                replace: true
+            })
         } else {
             return toast.error(response.message)
         }
@@ -86,11 +88,13 @@ const Signup = () => {
                     </div>
                     <div className="mt-3 w-full bg-white flex items-center border-2 rounded-xl">
                         <label><i className="fa fa-key p-3" /></label>
-                        <input type="password" name="password" placeholder="Password" className="w-full p-3 outline-none rounded-e-xl" value={formData.password} onChange={(event) => setFormData({...formData, [event.target.name]: event.target.value})}/>
+                        <input type={ PasswordVisibility?.password ? "text" : "password" } name="password" placeholder="Password" className="w-full p-3 outline-none" value={formData.password} onChange={(event) => setFormData({...formData, [event.target.name]: event.target.value})}/>
+                        <label><i className="fa fa-eye cursor-pointer p-3" onClick={() => setPasswordVisibility(prev => ({...prev, password: !prev.password}))}/></label>
                     </div>
                     <div className="mt-3 w-full bg-white flex items-center border-2 rounded-xl">
                         <label><i className="fa fa-lock p-3" /></label>
-                        <input type="password" name="confirm_password" placeholder="Confirm Password" className="w-full p-3 outline-none rounded-e-xl" value={formData.confirm_password} onChange={(event) => setFormData({...formData, [event.target.name]: event.target.value})}/>
+                        <input type={ PasswordVisibility?.confirm ? "text" : "password" } name="confirm_password" placeholder="Confirm Password" className="w-full p-3 outline-none" value={formData.confirm_password} onChange={(event) => setFormData({...formData, [event.target.name]: event.target.value})}/>
+                        <label><i className="fa fa-eye cursor-pointer p-3" onClick={() => setPasswordVisibility(prev => ({...prev, confirm: !prev.confirm}))}/></label>
                     </div>
                     <div className="mt-3 text-center">
                         <button className="p-2 bg-lightGreen mb-3 w-full rounded-xl text-white shadow-sm shadow-black active:shadow-none">Create Account</button>

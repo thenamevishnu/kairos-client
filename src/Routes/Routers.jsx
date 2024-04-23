@@ -5,9 +5,11 @@ import LoginPage from "../Pages/LoginPage"
 import ProtectedRoute from "../ProtectedRoute"
 import FaqPage from "../Pages/FaqPage"
 import SessionsPage from "../Pages/SessionsPage"
-import BookNowPage from "../Pages/BookNowPage"
-import BookingsPage from "../Pages/BookingsPage"
 import PageNotFoundPage from "../Pages/PageNotFoundPage"
+import BookNowPage from "../Pages/Student/BookNowPage"
+import BookingsPage from "../Pages/BookingsPage"
+import CreateSessionPage from "../Pages/Mentor/CreateSessionPage"
+import VideoCallPage from "../Pages/VideoCallPage"
 
 const Routers = () => {
     return (
@@ -21,13 +23,18 @@ const Routers = () => {
                         <Route exact path="" element={<ProtectedRoute><SessionsPage /></ProtectedRoute>} />
                         <Route path="book" element={<ProtectedRoute><BookNowPage /></ProtectedRoute>} />
                         <Route path="bookings" element={<ProtectedRoute><BookingsPage /></ProtectedRoute>} />
+                        <Route path="create" element={<ProtectedRoute><CreateSessionPage /></ProtectedRoute>} />
+                    </Route>
+
+                    <Route path="meet">
+                        <Route exact path="" element={ <ProtectedRoute><VideoCallPage /></ProtectedRoute> } />
                     </Route>
 
                     <Route path="signup" element={<ProtectedRoute noAuth><SignupPage /></ProtectedRoute>} />
-                    <Route path="login" element={ <ProtectedRoute noAuth><LoginPage /></ProtectedRoute> } />
+                    <Route path="login" element={<ProtectedRoute noAuth><LoginPage /></ProtectedRoute>} />
                 </Route>
 
-                <Route path="*" Component={PageNotFoundPage}/>
+                <Route path="*" Component={PageNotFoundPage} />
             </Routes>
         </BrowserRouter>
     )

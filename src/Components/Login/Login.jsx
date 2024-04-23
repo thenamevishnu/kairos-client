@@ -31,19 +31,17 @@ const Login = () => {
         if (response?.result) {
             setToken(response.result)
             const { sub } = jwtDecode(response.result)
-            toast.success("Redirecting...")
-            setTimeout(() => {
-                dispatch(updateUser({
-                    id: sub._id,
-                    name: sub.name,
-                    picture: sub.dp,
-                    email: sub.email,
-                    username: sub.username
-                }))
-                navigate(nextRoute ? nextRoute : "/", {
-                    replace: true
-                })
-            }, 1500);
+            dispatch(updateUser({
+                id: sub._id,
+                name: sub.name,
+                picture: sub.dp,
+                email: sub.email,
+                username: sub.username,
+                type: sub.type
+            }))
+            navigate(nextRoute ? nextRoute : "/", {
+                replace: true
+            })
         } else {
             return toast.error(response.message)
         }

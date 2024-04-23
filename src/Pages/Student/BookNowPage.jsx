@@ -1,5 +1,5 @@
 import { Fragment } from "react"
-import BookNow from "../Components/BookNow/BookNow"
+import BookNow from "../../Components/Student/BookNow/BookNow"
 
 const BookNowPage = () => {
     return (
