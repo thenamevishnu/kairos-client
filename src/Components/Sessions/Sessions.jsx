@@ -4,18 +4,23 @@ import { useNavigate } from "react-router-dom"
 import { getSessions } from "../../Services/session"
 import toast from "react-hot-toast"
 import { useSelector } from "react-redux"
+import Loader from "../Loader/Loader"
 
 const Sessions = () => {
 
     const { type: account_type, id: user_id } = useSelector(state => state.user)
     const [sessions, setSessions] = useState([])
     const naviagte = useNavigate()
+    const [isLoading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchData = async () => {
             const response = await getSessions(account_type, user_id)
             if (response?.result) {
-                setSessions(response.result)
+                setTimeout(() => {
+                    setLoading(false)
+                    setSessions(response.result)
+                }, 1200)
             } else {
                 return toast.error(response?.message)
             }
@@ -32,6 +37,11 @@ const Sessions = () => {
                 </div>
             </div>
             <div className="flex gap-5 flex-wrap mt-2 justify-center px-2 md:px-10">
+                
+                {
+                    isLoading && <Loader />
+                }
+
                 {
                     sessions?.map(item => {
                         return (

@@ -1,7 +1,7 @@
 
 const NewsLetter = () => {
     return (
-        <div className="bg-primaryGreen mt-20 py-6 flex justify-center relative">
+        <div className="bg-primaryGreen mt-20 py-6 flex justify-center relative z-[-1]">
             <div className="w-20 h-20 bg-lightGreen rounded-full opacity-30 pointer-events-none animate-floating absolute top-3 right-3"></div>
             <div className="w-20 h-20 bg-lightGreen rounded-full opacity-30 pointer-events-none animate-floating absolute bottom-3 left-3"></div>
             <div className="text-lightGreen text-center p-5">

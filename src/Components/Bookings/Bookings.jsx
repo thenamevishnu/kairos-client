@@ -4,11 +4,13 @@ import { getBookings, getMentorBookings } from "../../Services/session"
 import { useSelector } from "react-redux"
 import toast from "react-hot-toast"
 import { useNavigate } from "react-router-dom"
+import Loader from "../Loader/Loader"
 
 const Bookings = () => {
 
     const { id: userId, type: account_type } = useSelector(state => state.user)
     const [bookings, setBookings] = useState([])
+    const [isLoading, setLoading] = useState(true)
 
     const navigate = useNavigate()
 
@@ -16,7 +18,10 @@ const Bookings = () => {
         const fetchData = async () => {
             const response = account_type == "student" ? await getBookings(userId) : await getMentorBookings(userId)
             if (response?.result) {
-                setBookings(response.result)
+                setTimeout(() => {
+                    setLoading(false)
+                    setBookings(response.result)
+                }, 1200)
             } else {
                 return toast.error(response?.message)
             }
@@ -34,6 +39,9 @@ const Bookings = () => {
             </div>
             <div className="mt-2 flex justify-center w-full px-2 md:px-10">
                 <div className="flex gap-5 flex-wrap justify-center px-2 md:px-10">
+                    {
+                        isLoading && <Loader />
+                    }
                     {
                         bookings?.map(item => {
                             return (

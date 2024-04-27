@@ -10,6 +10,8 @@ import BookNowPage from "../Pages/Student/BookNowPage"
 import BookingsPage from "../Pages/BookingsPage"
 import CreateSessionPage from "../Pages/Mentor/CreateSessionPage"
 import VideoCallPage from "../Pages/VideoCallPage"
+import ProfilePage from "../Pages/ProfilePage"
+import PasswordResetPage from "../Pages/PasswordResetPage"
 
 const Routers = () => {
     return (
@@ -18,6 +20,12 @@ const Routers = () => {
                 <Route path="/">
                     <Route exact path="" element={<LandingPage />} />
                     <Route path="faq" element={<FaqPage />} />
+
+                    <Route path="profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+                    
+                    <Route path="password">
+                        <Route path="reset" element={ <PasswordResetPage /> } />
+                    </Route>
 
                     <Route path="sessions">
                         <Route exact path="" element={<ProtectedRoute><SessionsPage /></ProtectedRoute>} />

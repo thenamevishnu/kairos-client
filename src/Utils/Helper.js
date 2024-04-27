@@ -14,6 +14,14 @@ export const removeToken = () => {
     localStorage.removeItem("_access_token_")
 }
 
+export const initialRedux = {
+    id: "",
+    name: "",
+    picture: "",
+    email: "",
+    username: ""
+}
+
 export const sessionTimings = [
     {
         from: "09:30",

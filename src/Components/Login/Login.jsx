@@ -14,6 +14,7 @@ const Login = () => {
         email: "",
         password: ""
     })
+    const [passwordVisibility, setPasswordVisibility] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
@@ -59,11 +60,13 @@ const Login = () => {
                     </div>
                     <div className="mt-3 w-full flex bg-white items-center border-2 rounded-xl">
                         <label><i className="fa fa-key p-3 text-lightGreen" /></label>
-                        <input type="password" name="password" placeholder="Password" className="w-full bg-white p-3 rounded-xl outline-none" value={formData.password} onChange={(event) => setFormData({...formData, [event.target.name]: event.target.value})}/>
+                        <input type={ passwordVisibility ? "text" : "password" } name="password" placeholder="Password" className="w-full bg-white p-3 rounded-xl outline-none" value={formData.password} onChange={(event) => setFormData({...formData, [event.target.name]: event.target.value})}/>
+                        <i className="fa fa-eye p-3 text-lightGreen cursor-pointer" onClick={()=>setPasswordVisibility(prev => !prev)}/>
                     </div>
                     <div className="mt-3 text-center">
                         <button className="p-2 bg-lightGreen mb-3 w-full rounded-xl text-white">Login</button>
-                        <span className="text-sm text-lightGreen">Don't have an account? <span className="text-blue-700 cursor-pointer" onClick={() => navigate("/signup")}>Signup</span></span>
+                        <div className="text-sm text-lightGreen">Don't have an account? <span className="text-blue-700 cursor-pointer" onClick={() => navigate("/signup")}>Signup</span></div>
+                        <div className="text-sm text-lightGreen mt-2 cursor-pointer" onClick={() => navigate("/password/reset")}>Forgot Password</div>
                     </div>
                 </form>
             </div>

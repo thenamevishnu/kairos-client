@@ -18,7 +18,7 @@ const Signup = () => {
         password: "",
         confirm_password: ""
     })
-    const [PasswordVisibility, setPasswordVisibility] = useState({
+    const [passwordVisibility, setPasswordVisibility] = useState({
         password: false,
         confirm: false
     })
@@ -88,12 +88,12 @@ const Signup = () => {
                     </div>
                     <div className="mt-3 w-full bg-white flex items-center border-2 rounded-xl">
                         <label><i className="fa fa-key p-3" /></label>
-                        <input type={ PasswordVisibility?.password ? "text" : "password" } name="password" placeholder="Password" className="w-full p-3 outline-none" value={formData.password} onChange={(event) => setFormData({...formData, [event.target.name]: event.target.value})}/>
+                        <input type={ passwordVisibility?.password ? "text" : "password" } name="password" placeholder="Password" className="w-full p-3 outline-none" value={formData.password} onChange={(event) => setFormData({...formData, [event.target.name]: event.target.value})}/>
                         <label><i className="fa fa-eye cursor-pointer p-3" onClick={() => setPasswordVisibility(prev => ({...prev, password: !prev.password}))}/></label>
                     </div>
                     <div className="mt-3 w-full bg-white flex items-center border-2 rounded-xl">
                         <label><i className="fa fa-lock p-3" /></label>
-                        <input type={ PasswordVisibility?.confirm ? "text" : "password" } name="confirm_password" placeholder="Confirm Password" className="w-full p-3 outline-none" value={formData.confirm_password} onChange={(event) => setFormData({...formData, [event.target.name]: event.target.value})}/>
+                        <input type={ passwordVisibility?.confirm ? "text" : "password" } name="confirm_password" placeholder="Confirm Password" className="w-full p-3 outline-none" value={formData.confirm_password} onChange={(event) => setFormData({...formData, [event.target.name]: event.target.value})}/>
                         <label><i className="fa fa-eye cursor-pointer p-3" onClick={() => setPasswordVisibility(prev => ({...prev, confirm: !prev.confirm}))}/></label>
                     </div>
                     <div className="mt-3 text-center">
