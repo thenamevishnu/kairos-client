@@ -9,7 +9,8 @@ import { updateUser } from "../../Redux/UserSlice/User"
 const ChangePassword = () => {
 
     const [password, setPassword] = useState({ currentPassword: "", newPassword: "", confirmPassword: "" })
-    const {id: user_id} = useSelector(state => state.user)
+    const { id: user_id } = useSelector(state => state.user)
+    const [passwordVisibility, setPasswordVisibility] = useState({current: false, newPass: false, confirmPass: false})
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -44,15 +45,18 @@ const ChangePassword = () => {
                 <h1 className="text-start mb-5">Change Password</h1>
                 <div className="bg-gray-100 flex items-center w-full rounded-xl">
                     <i className="fa fa-lock p-2" />
-                    <input type="password" placeholder="Current Password" className="p-2 rounded-xl outline-none bg-transparent w-full" value={password.currentPassword} name="currentPassword"  onChange={(e) => setPassword({...password, [e.target.name]: e.target.value})}/>
+                    <input autoComplete="off" type={`${passwordVisibility.current ? "text" : "password"}`} placeholder="Current Password" className="p-2 rounded-xl outline-none bg-transparent w-full" value={password.currentPassword} name="currentPassword"  onChange={(e) => setPassword({...password, [e.target.name]: e.target.value})}/>
+                    <i className="fa fa-eye p-2 cursor-pointer" onClick={() => setPasswordVisibility(prev => ({...prev, current: !prev.current}))}/>
                 </div>
                 <div className="bg-gray-100 mt-3 flex items-center w-full rounded-xl">
                     <i className="fa fa-key p-2" />
-                    <input type="password" placeholder="New Password" className="p-2 rounded-xl outline-none bg-transparent w-full" value={password.newPassword} name="newPassword"  onChange={(e) => setPassword({...password, [e.target.name]: e.target.value})}/>
+                    <input autoComplete="off" type={`${passwordVisibility.newPass ? "text" : "password"}`} placeholder="New Password" className="p-2 rounded-xl outline-none bg-transparent w-full" value={password.newPassword} name="newPassword"  onChange={(e) => setPassword({...password, [e.target.name]: e.target.value})}/>
+                    <i className="fa fa-eye p-2 cursor-pointer" onClick={() => setPasswordVisibility(prev => ({...prev, newPass: !prev.newPass}))}/>
                 </div>
                 <div className="bg-gray-100 mt-3 flex items-center w-full rounded-xl">
                     <i className="fa fa-key p-2" />
-                    <input type="password" placeholder="Confirm Password" className="p-2 rounded-xl outline-none bg-transparent w-full" value={password.confirmPassword} name="confirmPassword"  onChange={(e) => setPassword({...password, [e.target.name]: e.target.value})}/>
+                    <input autoComplete="off" type={`${passwordVisibility.confirmPass ? "text" : "password"}`} placeholder="Confirm Password" className="p-2 rounded-xl outline-none bg-transparent w-full" value={password.confirmPassword} name="confirmPassword"  onChange={(e) => setPassword({...password, [e.target.name]: e.target.value})}/>
+                    <i className="fa fa-eye p-2 cursor-pointer" onClick={() => setPasswordVisibility(prev => ({...prev, confirmPass: !prev.confirmPass}))}/>
                 </div>
                 <div className="flex justify-start mt-5">
                     <button onClick={() => handlePasswordChange() } className="bg-purple-700 text-white p-1 px-2 rounded-lg"><i className="fa fa-refresh"/> Update</button>

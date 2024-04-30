@@ -62,3 +62,13 @@ export const resetPassword = async (email) => {
         return { message: errorMessage(err)}
     }
 }
+
+export const resetPasswordVerify = async (hash) => {
+    try {
+        const { data: response } = await api.patch(`/user/password/reset/verify`, { hash: hash })
+        if (response?.status == "OK") return true
+        return false
+    } catch (err) {
+        return false
+    }
+}

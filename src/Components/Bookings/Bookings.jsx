@@ -53,8 +53,11 @@ const Bookings = () => {
                                     <p>Mentor: {item.mentorInfo?.[0].name} </p>
                                     <p>Date: {new Date(item?.sessionInfo?.[0].date * 1000).toLocaleDateString("en-IN")}</p>
                                     <p>Time: {item?.sessionInfo?.[0].time.from} - {item?.sessionInfo?.[0]?.time.to}</p>
-                                    <p>MeetID: { item.roomId }</p>
-                                    <button onClick={() => navigate("/meet", {state: item})} className="bg-lightGreen p-1 px-3 text-white rounded-lg mt-4 w-full flex items-center justify-center"><i className="fa fa-video mr-2" /> Join Meet</button>
+                                    <p>MeetID: {item.roomId}</p>
+                                    <div className="flex w-full gap-1 mt-2">
+                                        <button onClick={() => navigate("/chat", {state: item})} className="bg-lightGreen p-1 px-3 w-1/2 text-white rounded-lg flex items-center justify-center"><i className="fa fa-message mr-2" /> Chat</button>
+                                        <button onClick={() => navigate("/meet", {state: item})} className="bg-lightGreen p-1 px-3 w-1/2 text-white rounded-lg flex items-center justify-center"><i className="fa fa-video mr-2" /> Meet</button>
+                                    </div>
                                 </div>
                             )
                         })

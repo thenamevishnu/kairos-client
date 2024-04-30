@@ -12,6 +12,8 @@ import CreateSessionPage from "../Pages/Mentor/CreateSessionPage"
 import VideoCallPage from "../Pages/VideoCallPage"
 import ProfilePage from "../Pages/ProfilePage"
 import PasswordResetPage from "../Pages/PasswordResetPage"
+import ResetPasswordVerifyPage from "../Pages/ResetPasswordVerifyPage"
+import MainChatScreenPage from "../Pages/MainChatScreenPage"
 
 const Routers = () => {
     return (
@@ -24,7 +26,11 @@ const Routers = () => {
                     <Route path="profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
                     
                     <Route path="password">
-                        <Route path="reset" element={ <PasswordResetPage /> } />
+                        <Route path="reset">
+                            <Route path="" element={<PasswordResetPage />} />
+                            <Route path="verify" element={ <ResetPasswordVerifyPage /> } />
+                        </Route>
+
                     </Route>
 
                     <Route path="sessions">
@@ -36,6 +42,10 @@ const Routers = () => {
 
                     <Route path="meet">
                         <Route exact path="" element={ <ProtectedRoute><VideoCallPage /></ProtectedRoute> } />
+                    </Route>
+
+                    <Route path="chat">
+                        <Route exact path="" element={ <ProtectedRoute><MainChatScreenPage /></ProtectedRoute> } />
                     </Route>
 
                     <Route path="signup" element={<ProtectedRoute noAuth><SignupPage /></ProtectedRoute>} />

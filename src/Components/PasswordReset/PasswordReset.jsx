@@ -11,11 +11,17 @@ const PasswordReset = () => {
 
     const handleReset = async (e) => {
         e.preventDefault()
-        const response = await resetPassword(formData)
-        if (response?.status == "OK") {
-            return toast.success(response.message)
-        }
-        return toast.error(response?.message)
+        return toast.promise(resetPassword(formData), {
+            loading: `Sending link to ${formData.email}`,
+            success: response => {
+                if (response?.status == "OK") {
+                    return response.message
+                }
+            },
+            error: response => {
+                return response?.message
+            }
+        })
     }
 
     return (
